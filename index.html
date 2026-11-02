@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="FOODFAT เว็บไซต์ค้นหาเมนูอาหารและแนะนำอาหารตามงบประมาณ"
+    >
+
+    <title>FOODFAT | สั่งอาหารออนไลน์</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- แถบนำทาง -->
+    <header class="navbar">
+
+        <a href="#" class="logo" aria-label="FOODFAT หน้าหลัก">
+            FOOD<span>FAT</span>
+        </a>
+
+        <div class="location">
+            <span class="location-icon">⌖</span>
+            <span>ส่งอาหารที่บ้าน</span>
+        </div>
+
+        <button
+            class="cart-button"
+            type="button"
+            onclick="showCart()"
+        >
+            🛒 ตะกร้า
+            <span id="cart-count">0</span>
+        </button>
+
+    </header>
+
+
+    <main>
+
+        <!-- ส่วนแนะนำเว็บไซต์ -->
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <p class="subtitle">
+                    เมนูหลากหลายที่นิยม
+                </p>
+
+                <h1>
+                    หิวเมื่อไรก็<br>
+                    สั่งได้เลย!
+                </h1>
+
+                <p class="description">
+                    ค้นพบเมนูโปรดของคุณ พร้อมระบบแนะนำอาหาร
+                    ที่ช่วยเลือกเมนูให้เหมาะกับงบประมาณ
+                </p>
+
+                <form class="search-box" id="search-form">
+
+                    <input
+                        type="search"
+                        id="search-input"
+                        placeholder="ค้นหาเมนูอาหาร..."
+                        aria-label="ค้นหาเมนูอาหาร"
+                        autocomplete="off"
+                    >
+
+                    <button type="submit">
+                        ค้นหา
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="hero-decoration" aria-hidden="true">
+                <div class="hero-circle">
+                    <span>🍜</span>
+                </div>
+
+                <div class="floating-food food-one">🍔</div>
+                <div class="floating-food food-two">🍕</div>
+                <div class="floating-food food-three">🥤</div>
+            </div>
+
+        </section>
+
+
+        <!-- หมวดหมู่อาหาร -->
+        <section class="container">
+
+            <div class="section-heading">
+                <div>
+                    <p class="section-label">EXPLORE</p>
+                    <h2>หมวดหมู่อาหาร</h2>
+                </div>
+            </div>
+
+            <div class="categories">
+
+                <button
+                    type="button"
+                    class="category-button active"
+                    data-category="all"
+                >
+                    🍽️ ทั้งหมด
+                </button>
+
+                <button
+                    type="button"
+                    class="category-button"
+                    data-category="rice"
+                >
+                    🍚 อาหารจานเดียว
+                </button>
+
+                <button
+                    type="button"
+                    class="category-button"
+                    data-category="noodle"
+                >
+                    🍜 ก๋วยเตี๋ยว
+                </button>
+
+                <button
+                    type="button"
+                    class="category-button"
+                    data-category="drink"
+                >
+                    🥤 เครื่องดื่ม
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- รายการอาหาร -->
+        <section class="container menu-section" id="menu-section">
+
+            <div class="section-heading menu-heading">
+
+                <div>
+                    <p class="section-label">OUR MENU</p>
+                    <h2>เมนูแนะนำสำหรับคุณ</h2>
+                    <p class="section-description">
+                        เลือกเมนูที่ชอบ แล้วเพิ่มลงตะกร้าได้เลย
+                    </p>
+                </div>
+
+                <span class="menu-count" id="menu-count">
+                    6 เมนู
+                </span>
+
+            </div>
+
+            <div id="food-list" class="food-grid">
+
+                <!-- JavaScript จะนำเมนูอาหารมาแสดงตรงนี้ -->
+
+            </div>
+
+        </section>
+
+
+        <!-- ระบบแนะนำอาหาร -->
+        <section class="ai-section">
+
+            <div class="ai-content">
+
+                <div class="ai-icon">✦</div>
+
+                <p class="section-label">SMART FOOD ASSISTANT</p>
+
+                <h2>ไม่รู้จะกินอะไรดี?</h2>
+
+                <p class="ai-description">
+                    บอกงบประมาณของคุณ แล้วให้ FOODFAT
+                    ช่วยเลือกเมนูที่เหมาะกับคุณ
+                </p>
+
+                <form id="budget-form" class="budget-form">
+
+                    <div class="budget-input-wrap">
+
+                        <label for="budget-input">
+                            งบประมาณของคุณ
+                        </label>
+
+                        <div class="budget-input-box">
+
+                            <input
+                                type="number"
+                                id="budget-input"
+                                min="1"
+                                step="1"
+                                placeholder="เช่น 100"
+                                required
+                            >
+
+                            <span>บาท</span>
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="recommend-button">
+                        ✨ แนะนำอาหาร
+                    </button>
+
+                </form>
+
+                <div
+                    id="recommendation-result"
+                    class="recommendation-result"
+                    aria-live="polite"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ส่วนท้าย -->
+    <footer class="footer">
+
+        <a href="#" class="logo">
+            FOOD<span>FAT</span>
+        </a>
+
+        <p>
+            อิ่มอร่อยได้ทุกวัน เลือกเมนูที่ใช่สำหรับคุณ
+        </p>
+
+        <small>
+            © 2026 FOODFAT. All rights reserved.
+        </small>
+
+    </footer>
+
+
+    <!-- หน้าต่างตะกร้าสินค้า -->
+    <dialog id="cart-dialog" class="cart-dialog">
+
+        <div class="dialog-header">
+
+            <div>
+                <p class="section-label">YOUR ORDER</p>
+                <h2>ตะกร้าของคุณ</h2>
+            </div>
+
+            <button
+                type="button"
+                class="close-dialog"
+                id="close-cart"
+                aria-label="ปิดตะกร้า"
+            >
+                &times;
+            </button>
+
+        </div>
+
+        <div id="cart-items" class="cart-items"></div>
+
+        <div class="cart-total">
+            <span>ยอดรวมทั้งหมด</span>
+            <strong id="cart-total">0 บาท</strong>
+        </div>
+
+        <button
+            type="button"
+            class="checkout-button"
+            id="checkout-button"
+        >
+            ยืนยันรายการ
+        </button>
+
+    </dialog>
+
+
+    <!-- ข้อความแจ้งเตือน -->
+    <div
+        id="foodfat-toast"
+        class="toast"
+        role="status"
+        aria-live="polite"
+    ></div>
+
+</body>
+</html>
